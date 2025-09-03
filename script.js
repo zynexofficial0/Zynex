@@ -1,34 +1,19 @@
-// Example: Fetching Bitcoin price from CoinGecko API
-async function loadCrypto() {
-  const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd");
-  const data = await res.json();
-  document.getElementById("crypto-data").innerHTML = `
-    Bitcoin: $${data.bitcoin.usd} <br>
-    Ethereum: $${data.ethereum.usd}
-  `;
-}
+const socket = io("https://your-backend.onrender.com"); // replace with Render URL
 
-// Example: Forex rates (USD to EUR/PKR) from exchangerate.host
-async function loadForex() {
-  const res = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=EUR,PKR");
-  const data = await res.json();
-  document.getElementById("forex-data").innerHTML = `
-    1 USD = ${data.rates.EUR} EUR <br>
-    1 USD = ${data.rates.PKR} PKR
-  `;
-}
+socket.on('trade', (trade) => {
+  const feed = document.getElementById('trade-feed');
+  const el = document.createElement('div');
+  el.className = trade.side === 'BUY' ? 'buy' : 'sell';
+  el.innerHTML = `[${trade.symbol}] ${trade.side} ${trade.qty} @ ${trade.price} (${new Date(trade.time).toLocaleTimeString()})`;
+  feed.prepend(el);
+});
 
-// Example: Stock prices (AAPL, TSLA) from Financial Modeling Prep (free API)
-async function loadStocks() {
-  const res = await fetch("https://financialmodelingprep.com/api/v3/quote/AAPL,TSLA?apikey=demo");
-  const data = await res.json();
-  document.getElementById("stock-data").innerHTML = `
-    Apple (AAPL): $${data[0].price} <br>
-    Tesla (TSLA): $${data[1].price}
-  `;
-}
-
-// Load all data
-loadCrypto();
-loadForex();
-loadStocks();
+socket.on('news', (articles) => {
+  const newsDiv = document.getElementById('news');
+  newsDiv.innerHTML = '<h3>Crypto News</h3>';
+  articles.forEach(a => {
+    const item = document.createElement('div');
+    item.innerHTML = `<a href="${a.url}" target="_blank">${a.title}</a> <small>(${a.source})</small>`;
+    newsDiv.appendChild(item);
+  });
+});
