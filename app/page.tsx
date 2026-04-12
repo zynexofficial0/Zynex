@@ -37,26 +37,28 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative overflow-hidden">
           {/* Background Gradient */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/15 via-background to-background" />
+          <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+          <div className="absolute top-40 right-1/4 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
           
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
             <div className="text-center max-w-3xl mx-auto">
               <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-foreground text-balance">
                 Discover the Latest{" "}
-                <span className="text-primary">Crypto Airdrops</span>
+                <span className="text-primary glow-text">Crypto Airdrops</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground text-balance">
                 Your gateway to free token distributions. Track, claim, and never miss an airdrop opportunity with Dropscope.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/airdrops">
-                  <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto">
+                  <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all w-full sm:w-auto">
                     Explore Airdrops
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="border-primary/50 hover:border-primary hover:bg-primary/10 w-full sm:w-auto transition-all">
                     Create Account
                   </Button>
                 </Link>
@@ -71,8 +73,8 @@ export default function HomePage() {
                 { value: "50K+", label: "Users" },
                 { value: "15+", label: "Chains" },
               ].map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <p className="font-display text-3xl md:text-4xl font-bold text-primary">{stat.value}</p>
+                <div key={stat.label} className="text-center p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 transition-colors">
+                  <p className="font-display text-3xl md:text-4xl font-bold text-primary glow-text">{stat.value}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
                 </div>
               ))}
@@ -96,9 +98,9 @@ export default function HomePage() {
               {features.map((feature) => (
                 <div
                   key={feature.title}
-                  className="relative p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-colors"
+                  className="relative p-6 rounded-2xl border border-border bg-card/80 hover:border-primary/50 hover:glow-sm transition-all group"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 mb-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 mb-4 group-hover:bg-primary/20 transition-colors">
                     <feature.icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="font-display text-lg font-semibold text-foreground">
@@ -153,8 +155,9 @@ export default function HomePage() {
         {/* Newsletter CTA */}
         <section className="py-20 border-t border-border">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="relative rounded-3xl border border-primary/30 bg-card p-8 md:p-12 overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+            <div className="relative rounded-3xl border border-primary/40 bg-card p-8 md:p-12 overflow-hidden glow-sm">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-primary/15 via-transparent to-transparent" />
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl" />
               
               <div className="relative flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="text-center md:text-left">
@@ -169,9 +172,9 @@ export default function HomePage() {
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="px-4 py-3 rounded-lg bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary w-full md:w-64"
+                    className="px-4 py-3 rounded-lg bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all w-full md:w-64"
                   />
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 whitespace-nowrap">
+                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all whitespace-nowrap">
                     Subscribe
                   </Button>
                 </div>

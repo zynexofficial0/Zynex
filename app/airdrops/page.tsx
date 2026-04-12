@@ -52,10 +52,11 @@ export default function AirdropsPage() {
       
       <main className="pt-16">
         {/* Page Header */}
-        <section className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <section className="border-b border-border bg-card/50 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              All Airdrops
+              All <span className="text-primary glow-text">Airdrops</span>
             </h1>
             <p className="mt-2 text-muted-foreground">
               Browse and discover the latest crypto airdrops across all chains
@@ -75,7 +76,7 @@ export default function AirdropsPage() {
                   placeholder="Search airdrops..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
                 />
               </div>
 
@@ -87,7 +88,7 @@ export default function AirdropsPage() {
                     variant={statusFilter === filter.value ? "default" : "outline"}
                     size="sm"
                     onClick={() => setStatusFilter(filter.value)}
-                    className={statusFilter === filter.value ? "bg-primary text-primary-foreground" : ""}
+                    className={statusFilter === filter.value ? "bg-primary text-primary-foreground glow-sm" : "hover:border-primary/50"}
                   >
                     {filter.label}
                   </Button>
@@ -98,7 +99,7 @@ export default function AirdropsPage() {
               <select
                 value={chainFilter}
                 onChange={(e) => setChainFilter(e.target.value)}
-                className="px-4 py-2.5 rounded-lg bg-input border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="px-4 py-2.5 rounded-lg bg-input border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
               >
                 {chainFilters.map((chain) => (
                   <option key={chain} value={chain}>

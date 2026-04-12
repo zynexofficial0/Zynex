@@ -9,10 +9,10 @@ interface ArticleCardProps {
 
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <Card className="group overflow-hidden transition-all hover:border-primary/50">
+    <Card className="group overflow-hidden transition-all hover:border-primary/50 hover:glow-sm">
       <CardContent className="p-6">
         <div className="flex items-center gap-2 mb-3">
-          <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+          <span className="inline-flex items-center rounded-full bg-primary/10 border border-primary/20 px-2.5 py-0.5 text-xs font-medium text-primary">
             {article.category}
           </span>
           <span className="flex items-center gap-1 text-xs text-muted-foreground">

@@ -19,11 +19,11 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary glow-sm group-hover:glow transition-all">
               <Coins className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="font-display text-xl font-bold text-foreground">
+            <span className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
               Dropscope
             </span>
           </Link>
@@ -44,12 +44,12 @@ export function Header() {
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <Link href="/login">
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="hover:text-primary">
                 Log in
               </Button>
             </Link>
             <Link href="/signup">
-              <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all">
                 Sign up
               </Button>
             </Link>

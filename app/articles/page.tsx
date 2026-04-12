@@ -29,10 +29,11 @@ export default function ArticlesPage() {
       
       <main className="pt-16">
         {/* Page Header */}
-        <section className="border-b border-border bg-card/50">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <section className="border-b border-border bg-card/50 relative overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              Articles & Guides
+              Articles & <span className="text-primary glow-text">Guides</span>
             </h1>
             <p className="mt-2 text-muted-foreground">
               Expert insights, tutorials, and analysis for crypto enthusiasts
@@ -52,7 +53,7 @@ export default function ArticlesPage() {
                   placeholder="Search articles..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-input border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
                 />
               </div>
 
@@ -64,7 +65,7 @@ export default function ArticlesPage() {
                     variant={categoryFilter === category ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCategoryFilter(category)}
-                    className={categoryFilter === category ? "bg-primary text-primary-foreground" : ""}
+                    className={categoryFilter === category ? "bg-primary text-primary-foreground glow-sm" : "hover:border-primary/50"}
                   >
                     {category}
                   </Button>

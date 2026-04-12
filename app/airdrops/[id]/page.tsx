@@ -44,11 +44,12 @@ export default async function AirdropDetailPage({
         </div>
 
         {/* Airdrop Header */}
-        <section className="border-b border-border">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        <section className="border-b border-border relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
               <div className="flex items-start gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary text-2xl font-bold text-primary">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary border border-primary/20 text-2xl font-bold text-primary glow-sm">
                   {airdrop.symbol.slice(0, 2)}
                 </div>
                 <div>
@@ -66,7 +67,7 @@ export default async function AirdropDetailPage({
 
               <div className="flex gap-3">
                 <a href={airdrop.website} target="_blank" rel="noopener noreferrer">
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all">
                     Visit Website
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </Button>
@@ -109,10 +110,10 @@ export default async function AirdropDetailPage({
                   </CardContent>
                 </Card>
 
-                <Card className="border-primary/30">
+                <Card className="border-primary/30 glow-sm">
                   <CardContent className="pt-6">
                     <div className="flex items-start gap-3">
-                      <AlertCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                      <AlertCircle className="h-5 w-5 text-primary flex-shrink-0 drop-shadow-[0_0_8px_var(--primary)]" />
                       <div>
                         <p className="font-medium text-foreground">Disclaimer</p>
                         <p className="text-sm text-muted-foreground mt-1">
@@ -153,7 +154,7 @@ export default async function AirdropDetailPage({
                     </div>
                     <div className="pt-4 border-t border-border">
                       <p className="text-sm text-muted-foreground mb-1">Estimated Value</p>
-                      <p className="text-2xl font-bold text-primary">{airdrop.estimatedValue}</p>
+                      <p className="text-2xl font-bold text-primary glow-text">{airdrop.estimatedValue}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -164,7 +165,7 @@ export default async function AirdropDetailPage({
                       Want to get notified when this airdrop launches?
                     </p>
                     <Link href="/signup">
-                      <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                      <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all">
                         Create Free Account
                       </Button>
                     </Link>

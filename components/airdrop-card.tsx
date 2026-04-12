@@ -12,16 +12,16 @@ interface AirdropCardProps {
 
 export function AirdropCard({ airdrop, featured = false }: AirdropCardProps) {
   return (
-    <Card className={`relative overflow-hidden transition-all hover:border-primary/50 ${featured ? 'border-primary/30' : ''}`}>
+    <Card className={`relative overflow-hidden transition-all hover:border-primary/50 hover:glow-sm group ${featured ? 'border-primary/30 glow-sm' : ''}`}>
       {airdrop.featured && (
         <div className="absolute top-3 right-3">
-          <Star className="h-5 w-5 text-primary fill-primary" />
+          <Star className="h-5 w-5 text-primary fill-primary drop-shadow-[0_0_8px_var(--primary)]" />
         </div>
       )}
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-xl font-bold text-primary">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary border border-primary/20 text-xl font-bold text-primary group-hover:border-primary/40 transition-colors">
               {airdrop.symbol.slice(0, 2)}
             </div>
             <div>
@@ -57,12 +57,12 @@ export function AirdropCard({ airdrop, featured = false }: AirdropCardProps) {
           </div>
           <div className="flex gap-2">
             <Link href={`/airdrops/${airdrop.id}`}>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="hover:border-primary/50 hover:text-primary">
                 Details
               </Button>
             </Link>
             <a href={airdrop.website} target="_blank" rel="noopener noreferrer">
-              <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all">
                 <ExternalLink className="h-4 w-4" />
               </Button>
             </a>

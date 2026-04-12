@@ -32,11 +32,11 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary glow-sm">
                 <Coins className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span className="font-display text-xl font-bold text-foreground">
+              <span className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                 Dropscope
               </span>
             </Link>
@@ -48,10 +48,10 @@ export function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="text-muted-foreground hover:text-primary transition-colors"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
                   aria-label={social.label}
                 >
-                  <social.icon className="h-5 w-5" />
+                  <social.icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
