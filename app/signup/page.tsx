@@ -50,7 +50,7 @@ export default function SignupPage() {
               <Coins className="h-6 w-6 text-primary-foreground" />
             </div>
             <span className="font-display text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
-              Dropscope
+              Airdrop Hunt
             </span>
           </Link>
 
@@ -95,7 +95,7 @@ export default function SignupPage() {
                   <Coins className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <span className="font-display text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
-                  Dropscope
+                  Airdrop Hunt
                 </span>
               </Link>
               

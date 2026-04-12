@@ -14,8 +14,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Dropscope | Discover Crypto Airdrops',
-  description: 'Your gateway to the latest crypto airdrops. Track, claim, and never miss a token distribution.',
+  title: 'Airdrop Hunt | Discover Crypto Airdrops',
+  description: 'Your gateway to the latest crypto airdrops. Track, claim, and never miss a token distribution with Airdrop Hunt.',
   keywords: ['crypto', 'airdrops', 'blockchain', 'tokens', 'web3', 'defi'],
   generator: 'v0.app',
   icons: {

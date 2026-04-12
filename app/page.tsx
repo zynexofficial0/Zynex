@@ -48,7 +48,7 @@ export default function HomePage() {
                 <span className="text-primary glow-text">Crypto Airdrops</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground text-balance">
-                Your gateway to free token distributions. Track, claim, and never miss an airdrop opportunity with Dropscope.
+                Your gateway to free token distributions. Track, claim, and never miss an airdrop opportunity with Airdrop Hunt.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/airdrops">
@@ -87,7 +87,7 @@ export default function HomePage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl font-bold text-foreground">
-                Why Choose Dropscope?
+                Why Choose Airdrop Hunt?
               </h2>
               <p className="mt-4 text-muted-foreground">
                 The most trusted platform for discovering crypto airdrops

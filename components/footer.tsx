@@ -37,7 +37,7 @@ export function Footer() {
                 <Coins className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                Dropscope
+                Airdrop Hunt
               </span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
@@ -111,7 +111,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border">
           <p className="text-center text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Dropscope. All rights reserved.
+            &copy; {new Date().getFullYear()} Airdrop Hunt. All rights reserved.
           </p>
         </div>
       </div>

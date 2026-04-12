@@ -24,7 +24,7 @@ export function Header() {
               <Coins className="h-5 w-5 text-primary-foreground" />
             </div>
             <span className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-              Dropscope
+              Airdrop Hunt
             </span>
           </Link>
 
