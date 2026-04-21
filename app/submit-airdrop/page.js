@@ -27,7 +27,7 @@ export default function SubmitAirdrop() {
   };
 
 const handleSubmit = async () => {
-  console.log("BUTTON CLICKED");
+  console.log("CLICK WORKS");
   setLoading(true);
   setMessage("Testing click...");
 
