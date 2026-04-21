@@ -26,29 +26,15 @@ export default function SubmitAirdrop() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
-    setLoading(true);
-    setMessage("");
+const handleSubmit = async () => {
+  console.log("BUTTON CLICKED");
+  setLoading(true);
+  setMessage("Testing click...");
 
-    const { error } = await supabase.from("airdrops").insert([form]);
-
-    if (error) {
-      setMessage("❌ Failed to submit.");
-    } else {
-      setMessage("✅ Airdrop submitted successfully!");
-      setForm({
-        project_name: "",
-        website: "",
-        twitter: "",
-        telegram: "",
-        discord: "",
-        blockchain: "",
-        description: "",
-      });
-    }
-
+  setTimeout(() => {
     setLoading(false);
-  };
+  }, 1000);
+};
 
   return (
     <div
