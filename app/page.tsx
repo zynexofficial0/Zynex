@@ -6,6 +6,12 @@ import { Button } from "@/components/ui/button"
 import { AirdropCard } from "@/components/airdrop-card"
 import { ArticleCard } from "@/components/article-card"
 import { airdrops, articles } from "@/lib/data"
+import dynamic from "next/dynamic"
+
+// Dynamically import the 3D component to avoid SSR issues
+const Falling3DObjects = dynamic(() => import("@/components/f3d-objects"), {
+  ssr: false,
+})
 
 const features = [
   {
@@ -36,6 +42,9 @@ export default function HomePage() {
       <main className="pt-16">
         {/* Hero Section */}
         <section className="relative overflow-hidden">
+          {/* 3D Falling Objects Background */}
+          <Falling3DObjects />
+          
           {/* Background Gradient */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/15 via-background to-background" />
           <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
