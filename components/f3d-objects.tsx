@@ -1,6 +1,6 @@
-'use client'
+﻿'use client'
 
-import { useRef, useMemo } from 'react'
+import { useEffect, useRef, useMemo, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
 import * as THREE from 'three'
@@ -105,6 +105,31 @@ function FallingAirdrops() {
   )
 }
 
+function LogoBackdrop() {
+  const [texture, setTexture] = useState<THREE.Texture | null>(null)
+
+  useEffect(() => {
+    new THREE.TextureLoader().load(
+      '/airdrop-hunt-logo.png',
+      (loadedTexture) => setTexture(loadedTexture),
+      undefined,
+      () => setTexture(null)
+    )
+  }, [])
+
+  return (
+    <mesh position={[0, 0, -8]}>
+      <planeGeometry args={[18, 18]} />
+      <meshBasicMaterial
+        map={texture ?? undefined}
+        color={texture ? undefined : '#0f172a'}
+        transparent
+        opacity={0.12}
+      />
+    </mesh>
+  )
+}
+
 export default function Falling3DObjects() {
   return (
     <div className="absolute inset-0 pointer-events-none">
@@ -112,6 +137,7 @@ export default function Falling3DObjects() {
         camera={{ position: [0, 0, 5], fov: 75 }}
         style={{ background: 'transparent' }}
       >
+        <LogoBackdrop />
         <FallingCoins />
         <FallingAirdrops />
       </Canvas>

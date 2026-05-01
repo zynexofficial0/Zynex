@@ -1,8 +1,9 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { Menu, X, Coins } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
@@ -20,8 +21,14 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary glow-sm group-hover:glow transition-all">
-              <Coins className="h-5 w-5 text-primary-foreground" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 glow-sm group-hover:glow transition-all">
+              <Image
+                src="/airdrop-hunt-logo.png"
+                width={24}
+                height={24}
+                alt="Airdrop Hunt logo"
+                className="object-contain"
+              />
             </div>
             <span className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
               Airdrop Hunt
