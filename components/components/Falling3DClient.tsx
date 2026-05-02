@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 
 const Falling3DObjects = dynamic(
-  () => import('./f3d-objects'),
+  () => import('../f3d-objects'),
   { ssr: false }
 )
 
