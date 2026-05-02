@@ -1,100 +1,93 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { useState } from "react"
-import { Menu, X, Coins } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/airdrops", label: "Airdrops" },
-  { href: "/articles", label: "Articles" },
+    { href: '/', label: 'Home' },
+    { href: '/articles', label: 'Articles' },
 ]
 
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary glow-sm group-hover:glow transition-all">
-              <Coins className="h-5 w-5 text-primary-foreground" />
+    return (
+        <header className="absolute top-0 left-0 right-0 z-50">
+            <div className="container mx-auto px-4">
+                <div className="flex h-14 items-center justify-between">
+                    {/* Small Logo Icon */}
+                    <Link href="/" className="flex items-center">
+                        <Image 
+                            src="/logo.png" 
+                            alt="Airdrop Hunt Logo" 
+                            width={28}
+                            height={28}
+                            className="object-contain"
+                            priority
+                        />
+                    </Link>
+
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex items-center gap-6">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="text-sm font-medium text-white hover:text-primary transition-colors"
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </nav>
+
+                    {/* Mobile Menu Button */}
+                    <button
+                        className="md:hidden p-2 text-white"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            {mobileMenuOpen ? (
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            ) : (
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            )}
+                        </svg>
+                    </button>
+                </div>
+
+                {/* Mobile Navigation */}
+                {mobileMenuOpen && (
+                    <div className="md:hidden py-4 bg-black/80 backdrop-blur-sm rounded-lg mt-2">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="block py-2 px-4 text-sm font-medium text-white hover:text-primary transition-colors"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </div>
+                )}
             </div>
-            <span className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-              Airdrop Hunt
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Desktop Auth Buttons */}
-          <div className="hidden md:flex items-center gap-3">
-            <Link href="/login">
-              <Button variant="ghost" size="sm" className="hover:text-primary">
-                Log in
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all">
-                Sign up
-              </Button>
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-foreground"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-border py-4">
-            <nav className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="flex flex-col gap-2 pt-4 border-t border-border">
-                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">
-                    Log in
-                  </Button>
-                </Link>
-                <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                    Sign up
-                  </Button>
-                </Link>
-              </div>
-            </nav>
-          </div>
-        )}
-      </div>
-    </header>
-  )
+        </header>
+    )
 }
