@@ -21,15 +21,14 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 glow-sm group-hover:glow transition-all">
-              <Image
-                src="/WhatsApp Image 2026-04-27 at 0..."
-                width={28}
-                height={28}
-                alt="Airdrop Hunt logo"
-                className="object-contain"
-              />
-            </div>
+            <Image 
+              src="/logo.png" 
+              alt="Logo" 
+              width={120} 
+              height={40}
+              style={{ width: 'auto', height: 'auto' }}
+              priority
+            />
             <span className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
               Airdrop Hunt
             </span>

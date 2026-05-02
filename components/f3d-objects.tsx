@@ -1,146 +1,96 @@
 ﻿'use client'
 
-import { useEffect, useRef, useMemo, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Points, PointMaterial } from '@react-three/drei'
-import * as THREE from 'three'
+import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 
-function FallingCoins() {
-  const pointsRef = useRef<THREE.Points>(null)
+const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/articles', label: 'Articles' },
+]
 
-  // Generate random positions for coins
-  const positions = useMemo(() => {
-    const positions = new Float32Array(1000 * 3) // 1000 coins, 3 coordinates each
+export function Header() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-    for (let i = 0; i < 1000; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 20 // x
-      positions[i * 3 + 1] = Math.random() * 20 + 10 // y (start above screen)
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 20 // z
-    }
+    return (
+        <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background">
+            <div className="container mx-auto px-4">
+                <div className="flex h-16 items-center justify-between">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-2">
+                        <Image 
+                            src="/logo.png" 
+                            alt="Airdrop Hunt Logo" 
+                            width={40}
+                            height={40}
+                            className="object-contain"
+                            priority
+                        />
+                        <span className="font-bold text-xl hidden sm:inline-block">
+                            Airdrop Hunt
+                        </span>
+                    </Link>
 
-    return positions
-  }, [])
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex items-center gap-6">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="text-sm font-medium hover:text-primary transition-colors"
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </nav>
 
-  // Animate falling
-  useFrame((state) => {
-    if (pointsRef.current) {
-      const positions = pointsRef.current.geometry.attributes.position.array as Float32Array
+                    {/* Mobile Menu Button */}
+                    <button
+                        className="md:hidden p-2"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            {mobileMenuOpen ? (
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            ) : (
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            )}
+                        </svg>
+                    </button>
+                </div>
 
-      for (let i = 0; i < 1000; i++) {
-        // Move coins down
-        positions[i * 3 + 1] -= 0.02
-
-        // Reset position when coin falls below screen
-        if (positions[i * 3 + 1] < -10) {
-          positions[i * 3 + 1] = Math.random() * 5 + 15 // reset to top
-          positions[i * 3] = (Math.random() - 0.5) * 20 // new x position
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 20 // new z position
-        }
-      }
-
-      pointsRef.current.geometry.attributes.position.needsUpdate = true
-    }
-  })
-
-  return (
-    <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color="#fbbf24" // gold color
-        size={0.05}
-        sizeAttenuation={true}
-        depthWrite={false}
-      />
-    </Points>
-  )
-}
-
-function FallingAirdrops() {
-  const pointsRef = useRef<THREE.Points>(null)
-
-  // Generate random positions for airdrops
-  const positions = useMemo(() => {
-    const positions = new Float32Array(500 * 3) // 500 airdrops, 3 coordinates each
-
-    for (let i = 0; i < 500; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 25 // x
-      positions[i * 3 + 1] = Math.random() * 25 + 10 // y (start above screen)
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 25 // z
-    }
-
-    return positions
-  }, [])
-
-  // Animate falling
-  useFrame((state) => {
-    if (pointsRef.current) {
-      const positions = pointsRef.current.geometry.attributes.position.array as Float32Array
-
-      for (let i = 0; i < 500; i++) {
-        // Move airdrops down
-        positions[i * 3 + 1] -= 0.015
-
-        // Reset position when airdrop falls below screen
-        if (positions[i * 3 + 1] < -15) {
-          positions[i * 3 + 1] = Math.random() * 5 + 20 // reset to top
-          positions[i * 3] = (Math.random() - 0.5) * 25 // new x position
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 25 // new z position
-        }
-      }
-
-      pointsRef.current.geometry.attributes.position.needsUpdate = true
-    }
-  })
-
-  return (
-    <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color="#3b82f6" // blue color
-        size={0.03}
-        sizeAttenuation={true}
-        depthWrite={false}
-      />
-    </Points>
-  )
-}
-
-function LogoBackdrop() {
-  const [texture, setTexture] = useState<THREE.Texture | null>(null)
-
-  useEffect(() => {
-    new THREE.TextureLoader().load(
-      '/airdrop-hunt-logo.png',
-      (loadedTexture) => setTexture(loadedTexture),
-      undefined,
-      () => setTexture(null)
+                {/* Mobile Navigation */}
+                {mobileMenuOpen && (
+                    <div className="md:hidden py-4 border-t border-border">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </header>
     )
-  }, [])
-
-  return (
-    <mesh position={[0, 0, -8]}>
-      <planeGeometry args={[18, 18]} />
-      <meshBasicMaterial
-        map={texture ?? undefined}
-        color={texture ? undefined : '#0f172a'}
-        transparent
-        opacity={0.12}
-      />
-    </mesh>
-  )
-}
-
-export default function Falling3DObjects() {
-  return (
-    <div className="absolute inset-0 pointer-events-none">
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 75 }}
-        style={{ background: 'transparent' }}
-      >
-        <LogoBackdrop />
-        <FallingCoins />
-        <FallingAirdrops />
-      </Canvas>
-    </div>
-  )
 }
