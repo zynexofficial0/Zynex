@@ -21,11 +21,11 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 glow-sm group-hover:glow transition-all">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 glow-sm group-hover:glow transition-all">
               <Image
-                src="/airdrop-hunt-logo.png"
-                width={24}
-                height={24}
+                src="/WhatsApp Image 2026-04-27 at 0..."
+                width={28}
+                height={28}
                 alt="Airdrop Hunt logo"
                 className="object-contain"
               />
