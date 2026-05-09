@@ -5,13 +5,10 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { airdrops, getStatusColor } from "@/lib/data"
+import { getStatusColor } from "@/lib/data"
+import { supabase, normalizeAirdrop } from "@/lib/supabase"
 
-export function generateStaticParams() {
-  return airdrops.map((airdrop) => ({
-    id: airdrop.id,
-  }))
-}
+export const dynamic = "force-dynamic"
 
 export default async function AirdropDetailPage({
   params,
@@ -19,11 +16,18 @@ export default async function AirdropDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const airdrop = airdrops.find((a) => a.id === id)
 
-  if (!airdrop) {
+  const { data, error } = await supabase
+    .from("airdrops")
+    .select("*")
+    .eq("id", id)
+    .single()
+
+  if (error || !data) {
     notFound()
   }
+
+  const airdrop = normalizeAirdrop(data)
 
   return (
     <div className="min-h-screen bg-background">

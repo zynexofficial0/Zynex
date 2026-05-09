@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Search, Filter, X } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { AirdropCard } from "@/components/airdrop-card"
-import { airdrops, type AirdropStatus } from "@/lib/data"
+import type { Airdrop, AirdropStatus } from "@/lib/data"
+import { supabase, normalizeAirdrop } from "@/lib/supabase"
 
 const statusFilters: { value: AirdropStatus | "all"; label: string }[] = [
   { value: "all", label: "All" },
@@ -23,9 +24,30 @@ const chainFilters = [
 ]
 
 export default function AirdropsPage() {
+  const [airdrops, setAirdrops] = useState<Airdrop[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<AirdropStatus | "all">("all")
   const [chainFilter, setChainFilter] = useState("All Chains")
+
+  useEffect(() => {
+    async function loadAirdrops() {
+      setLoading(true)
+      const { data, error } = await supabase.from("airdrops").select("*")
+
+      if (error) {
+        setError(error.message)
+        setAirdrops([])
+      } else {
+        setAirdrops((data ?? []).map(normalizeAirdrop))
+      }
+
+      setLoading(false)
+    }
+
+    loadAirdrops()
+  }, [])
 
   const filteredAirdrops = airdrops.filter((airdrop) => {
     const matchesSearch = airdrop.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -133,7 +155,16 @@ export default function AirdropsPage() {
               </p>
             </div>
 
-            {filteredAirdrops.length > 0 ? (
+            {loading ? (
+              <div className="text-center py-16">
+                <p className="text-muted-foreground">Loading airdrops...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-16">
+                <p className="text-foreground mb-3">Unable to load airdrops.</p>
+                <p className="text-sm text-muted-foreground">{error}</p>
+              </div>
+            ) : filteredAirdrops.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredAirdrops.map((airdrop) => (
                   <AirdropCard key={airdrop.id} airdrop={airdrop} />
