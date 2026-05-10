@@ -2,13 +2,26 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { AirdropsList } from "@/components/airdrops-list"
 import { supabase, normalizeAirdrop } from "@/lib/supabase"
+import { airdrops as defaultAirdrops } from "@/lib/data"
 import type { Airdrop } from "@/lib/data"
 
 export default async function AirdropsPage() {
-  const { data, error } = await supabase.from("airdrops").select("*")
+  let airdrops: Airdrop[] = defaultAirdrops
+  let errorMessage: string | null = null
 
-  const airdrops: Airdrop[] = (data ?? []).map(normalizeAirdrop)
-  const errorMessage = error?.message ?? null
+  try {
+    const { data, error } = await supabase.from("airdrops").select("*")
+    
+    if (error) {
+      console.warn("Supabase fetch error, using local data:", error.message)
+      errorMessage = null // Don't show error to user, just use local data
+    } else if (data && data.length > 0) {
+      airdrops = data.map(normalizeAirdrop)
+    }
+  } catch (err) {
+    console.warn("Failed to fetch from Supabase, using local data:", err)
+    errorMessage = null // Use local data silently
+  }
 
   return (
     <div className="min-h-screen bg-background">

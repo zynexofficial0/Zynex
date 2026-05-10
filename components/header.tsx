@@ -6,7 +6,10 @@ import Image from 'next/image'
 
 const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/airdrops', label: 'Airdrops' },
     { href: '/articles', label: 'Articles' },
+    { href: '/submit-airdrop', label: 'Submit Airdrop' },
+    { href: '/submit-article', label: 'Submit Article' },
 ]
 
 export function Header() {

@@ -6,6 +6,7 @@ const footerLinks = {
     { href: "/airdrops", label: "Airdrops" },
     { href: "/articles", label: "Articles" },
     { href: "/submit-airdrop", label: "Submit Airdrop" },
+    { href: "/submit-article", label: "Submit Article" },
   ],
   company: [
     { href: "/about", label: "About" },

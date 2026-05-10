@@ -9,15 +9,14 @@ const supabase = createClient(
   "sb_publishable_QnmZnH13G6a6Ny0pCuN8Xw_qlGevC7O"
 );
 
-export default function SubmitAirdrop() {
+export default function SubmitArticle() {
   const [form, setForm] = useState({
-    project_name: "",
-    website: "",
-    twitter: "",
-    telegram: "",
-    discord: "",
-    blockchain: "",
-    description: "",
+    title: "",
+    excerpt: "",
+    content: "",
+    author: "",
+    category: "",
+    read_time: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -30,8 +29,8 @@ export default function SubmitAirdrop() {
 
   const handleSubmit = async () => {
     // Validate required fields
-    if (!form.project_name || !form.website || !form.blockchain) {
-      setMessage("Please fill in all required fields (Project Name, Website, Blockchain)");
+    if (!form.title || !form.author || !form.category || !form.content) {
+      setMessage("Please fill in all required fields (Title, Author, Category, Content)");
       setSuccess(false);
       return;
     }
@@ -41,16 +40,23 @@ export default function SubmitAirdrop() {
     setSuccess(false);
 
     try {
+      // Generate slug from title
+      const slug = form.title
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
+
       // Try to save to Supabase
-      const { error } = await supabase.from("submitted_airdrops").insert([
+      const { error } = await supabase.from("submitted_articles").insert([
         {
-          project_name: form.project_name,
-          website: form.website,
-          twitter: form.twitter,
-          telegram: form.telegram,
-          discord: form.discord,
-          blockchain: form.blockchain,
-          description: form.description,
+          title: form.title,
+          excerpt: form.excerpt,
+          content: form.content,
+          author: form.author,
+          category: form.category,
+          read_time: form.read_time || "5 min read",
+          slug: slug,
           created_at: new Date().toISOString(),
         },
       ]);
@@ -59,41 +65,41 @@ export default function SubmitAirdrop() {
         // If Supabase fails, save to localStorage as fallback
         console.warn("Supabase insert failed, saving to localStorage", error);
         const submissions = JSON.parse(
-          localStorage.getItem("airdrop_submissions") || "[]"
+          localStorage.getItem("article_submissions") || "[]"
         );
         submissions.push({
           id: Date.now(),
           ...form,
+          slug: slug,
           created_at: new Date().toISOString(),
         });
         localStorage.setItem(
-          "airdrop_submissions",
+          "article_submissions",
           JSON.stringify(submissions)
         );
       }
 
       setSuccess(true);
       setMessage(
-        "✓ Airdrop submitted successfully! Our team will review it shortly."
+        "✓ Article submitted successfully! Our team will review it shortly."
       );
-      
+
       // Reset form
       setForm({
-        project_name: "",
-        website: "",
-        twitter: "",
-        telegram: "",
-        discord: "",
-        blockchain: "",
-        description: "",
+        title: "",
+        excerpt: "",
+        content: "",
+        author: "",
+        category: "",
+        read_time: "",
       });
 
       // Clear message after 5 seconds
       setTimeout(() => setMessage(""), 5000);
     } catch (err) {
-      console.error("Error submitting airdrop:", err);
+      console.error("Error submitting article:", err);
       setSuccess(false);
-      setMessage("Error submitting airdrop. Please try again.");
+      setMessage("Error submitting article. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -122,79 +128,68 @@ export default function SubmitAirdrop() {
         <Link href="/" style={{ color: "#22c55e", textDecoration: "none" }}>
           ← Back to Home
         </Link>
-        
+
         <h1 style={{ fontSize: "32px", marginBottom: "10px", marginTop: "20px" }}>
-          Submit Airdrop
+          Submit Article
         </h1>
 
         <p style={{ color: "#aaa", marginBottom: "30px" }}>
-          Submit your crypto project for listing on Airdrop Hunt. No limits on submissions!
+          Share your crypto insights with our community. No limits on submissions!
         </p>
 
         <input
-          name="project_name"
-          placeholder="Project Name *"
-          value={form.project_name}
+          name="title"
+          placeholder="Article Title *"
+          value={form.title}
           onChange={handleChange}
           style={inputStyle}
         />
 
         <input
-          name="website"
-          placeholder="Website URL *"
-          value={form.website}
-          onChange={handleChange}
-          style={inputStyle}
-        />
-
-        <input
-          name="twitter"
-          placeholder="Twitter / X Link"
-          value={form.twitter}
-          onChange={handleChange}
-          style={inputStyle}
-        />
-
-        <input
-          name="telegram"
-          placeholder="Telegram Link"
-          value={form.telegram}
-          onChange={handleChange}
-          style={inputStyle}
-        />
-
-        <input
-          name="discord"
-          placeholder="Discord Link"
-          value={form.discord}
+          name="author"
+          placeholder="Author Name *"
+          value={form.author}
           onChange={handleChange}
           style={inputStyle}
         />
 
         <select
-          name="blockchain"
-          value={form.blockchain}
+          name="category"
+          value={form.category}
           onChange={handleChange}
           style={inputStyle}
         >
-          <option value="">Select Blockchain *</option>
-          <option>Ethereum</option>
-          <option>Solana</option>
-          <option>BNB Chain</option>
-          <option>Base</option>
-          <option>Polygon</option>
-          <option>Arbitrum</option>
-          <option>Optimism</option>
-          <option>zkSync</option>
-          <option>Scroll</option>
-          <option>Multi-chain</option>
+          <option value="">Select Category *</option>
+          <option>Guide</option>
+          <option>Education</option>
+          <option>Analysis</option>
+          <option>Security</option>
+          <option>Trends</option>
+          <option>News</option>
         </select>
 
+        <input
+          name="read_time"
+          placeholder="Read Time (e.g., 5 min read)"
+          value={form.read_time}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+
         <textarea
-          name="description"
-          placeholder="Project Description"
-          rows="5"
-          value={form.description}
+          name="excerpt"
+          placeholder="Article Excerpt"
+          rows="3"
+          value={form.excerpt}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+
+        <textarea
+          name="content"
+          placeholder="Article Content *"
+          rows="10"
+          value={form.content}
           onChange={handleChange}
           style={inputStyle}
         />
@@ -215,7 +210,7 @@ export default function SubmitAirdrop() {
             opacity: loading ? 0.7 : 1,
           }}
         >
-          {loading ? "Submitting..." : "Submit Airdrop"}
+          {loading ? "Submitting..." : "Submit Article"}
         </button>
 
         {message && (
