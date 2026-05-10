@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     // Try to insert into Supabase
     try {
       const { error } = await supabase
-        .from("submitted_articles")
+        .from("articles")
         .insert([
           {
             title: body.title,
@@ -37,6 +37,7 @@ export async function POST(request: Request) {
             category: body.category,
             read_time: body.read_time || "5 min read",
             slug: slug,
+            published_at: new Date().toISOString(),
             created_at: new Date().toISOString(),
           },
         ])

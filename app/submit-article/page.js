@@ -48,7 +48,7 @@ export default function SubmitArticle() {
         .replace(/-+/g, "-");
 
       // Try to save to Supabase
-      const { error } = await supabase.from("submitted_articles").insert([
+      const { error } = await supabase.from("articles").insert([
         {
           title: form.title,
           excerpt: form.excerpt,
@@ -57,6 +57,7 @@ export default function SubmitArticle() {
           category: form.category,
           read_time: form.read_time || "5 min read",
           slug: slug,
+          published_at: new Date().toISOString(),
           created_at: new Date().toISOString(),
         },
       ]);

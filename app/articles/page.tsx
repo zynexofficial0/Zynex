@@ -1,23 +1,63 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Search, BookOpen } from "lucide-react"
+import { createClient } from "@supabase/supabase-js"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { ArticleCard } from "@/components/article-card"
-import { articles } from "@/lib/data"
+import { articles as defaultArticles } from "@/lib/data"
+import { normalizeArticle } from "@/lib/supabase"
+import type { Article } from "@/lib/data"
 
-const categories = ["All", "Guide", "Education", "Analysis", "Security", "Trends"]
+const categories = ["All", "Guide", "Education", "Analysis", "Security", "Trends", "News"]
+
+const supabase = createClient(
+  "https://kmhtrtkblpxmowcibrjf.supabase.co",
+  "sb_publishable_QnmZnH13G6a6Ny0pCuN8Xw_qlGevC7O"
+)
 
 export default function ArticlesPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("All")
+  const [articles, setArticles] = useState<Article[]>(defaultArticles)
+
+  useEffect(() => {
+    async function fetchArticles() {
+      try {
+        const [{ data: articlesData, error: articlesError }, { data: submittedData, error: submittedError }] =
+          await Promise.all([
+            supabase.from("articles").select("*").order("created_at", { ascending: false }),
+            supabase.from("submitted_articles").select("*").order("created_at", { ascending: false }),
+          ])
+
+        if (articlesError && submittedError) {
+          console.warn("Failed to load articles from Supabase", articlesError, submittedError)
+          return
+        }
+
+        const merged = [
+          ...(articlesData ?? []).map(normalizeArticle),
+          ...(submittedData ?? []).map(normalizeArticle),
+        ]
+
+        if (merged.length > 0) {
+          setArticles(merged)
+        }
+      } catch (error) {
+        console.warn("Error loading articles:", error)
+      }
+    }
+
+    fetchArticles()
+  }, [])
 
   const filteredArticles = articles.filter((article) => {
-    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    const matchesSearch =
+      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
-    
+
     const matchesCategory = categoryFilter === "All" || article.category === categoryFilter
 
     return matchesSearch && matchesCategory

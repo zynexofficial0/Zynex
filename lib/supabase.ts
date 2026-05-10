@@ -29,3 +29,25 @@ export function normalizeAirdrop(record: any): Airdrop {
     featured: Boolean(record.featured),
   }
 }
+
+export function normalizeArticle(record: any) {
+  const slug = record.slug ??
+    (record.title || "")
+      .toLowerCase()
+      .replace(/[^
+\w\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+
+  return {
+    id: String(record.id),
+    title: record.title ?? "",
+    excerpt: record.excerpt ?? record.summary ?? "",
+    content: record.content ?? "",
+    author: record.author ?? "",
+    publishedAt: record.publishedAt ?? record.published_at ?? record.created_at ?? new Date().toISOString(),
+    readTime: record.read_time ?? record.readTime ?? "5 min read",
+    category: record.category ?? "Guide",
+    slug: slug,
+  }
+}
