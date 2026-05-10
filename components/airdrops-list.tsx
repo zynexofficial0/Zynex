@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Search, Filter, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { AirdropCard } from "@/components/airdrop-card"
@@ -29,10 +29,52 @@ export function AirdropsList({ airdrops, error }: AirdropsListProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState<AirdropStatus | "all">("all")
   const [chainFilter, setChainFilter] = useState("All Chains")
+  const [localAirdrops, setLocalAirdrops] = useState<Airdrop[]>([])
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem("airdrop_submissions")
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed)) {
+          const normalized = parsed.map((record) => ({
+            id: String(record.id ?? record.project_name ?? Date.now()),
+            name: record.project_name ?? record.name ?? "",
+            symbol: record.symbol ?? "",
+            description: record.description ?? "",
+            status: (record.status as AirdropStatus) ?? "active",
+            chain: record.chain ?? record.blockchain ?? "",
+            estimatedValue: record.estimatedValue ?? "",
+            endDate: record.endDate ?? new Date().toISOString(),
+            requirements: Array.isArray(record.requirements)
+              ? record.requirements
+              : typeof record.requirements === "string"
+              ? record.requirements.split(",").map((req: string) => req.trim()).filter(Boolean)
+              : [],
+            website: record.website ?? record.url ?? "",
+            featured: Boolean(record.featured),
+          }))
+          setLocalAirdrops(normalized)
+        }
+      }
+    } catch {
+      // ignore invalid local storage data
+    }
+  }, [])
+
+  const mergedAirdrops = useMemo(() => {
+    const merged = [...airdrops, ...localAirdrops]
+    const seenIds = new Set<string>()
+    return merged.filter((item) => {
+      if (seenIds.has(item.id)) return false
+      seenIds.add(item.id)
+      return true
+    })
+  }, [airdrops, localAirdrops])
 
   const filteredAirdrops = useMemo(
     () =>
-      airdrops.filter((airdrop) => {
+      mergedAirdrops.filter((airdrop) => {
         const matchesSearch =
           airdrop.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           airdrop.symbol.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -43,7 +85,7 @@ export function AirdropsList({ airdrops, error }: AirdropsListProps) {
 
         return matchesSearch && matchesStatus && matchesChain
       }),
-    [airdrops, searchQuery, statusFilter, chainFilter]
+    [mergedAirdrops, searchQuery, statusFilter, chainFilter]
   )
 
   const clearFilters = () => {

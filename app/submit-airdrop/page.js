@@ -42,16 +42,21 @@ export default function SubmitAirdrop() {
 
     try {
       // Try to save to Supabase
-      const { error } = await supabase.from("submitted_airdrops").insert([
+      const { error } = await supabase.from("airdrops").insert([
         {
-          project_name: form.project_name,
+          name: form.project_name,
+          symbol: "",
+          description: form.description,
+          status: "active",
+          chain: form.blockchain,
+          estimatedValue: "",
+          endDate: new Date().toISOString().split("T")[0],
+          requirements: [],
           website: form.website,
+          featured: false,
           twitter: form.twitter,
           telegram: form.telegram,
           discord: form.discord,
-          blockchain: form.blockchain,
-          description: form.description,
-          created_at: new Date().toISOString(),
         },
       ]);
 

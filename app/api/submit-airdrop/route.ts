@@ -20,17 +20,22 @@ export async function POST(request: Request) {
     // Try to insert into Supabase
     try {
       const { error } = await supabase
-        .from("submitted_airdrops")
+        .from("airdrops")
         .insert([
           {
-            project_name: body.project_name,
+            name: body.project_name,
+            symbol: "",
+            description: body.description || null,
+            status: "active",
+            chain: body.blockchain,
+            estimatedValue: "",
+            endDate: new Date().toISOString().split("T")[0],
+            requirements: [],
             website: body.website,
+            featured: false,
             twitter: body.twitter || null,
             telegram: body.telegram || null,
             discord: body.discord || null,
-            blockchain: body.blockchain,
-            description: body.description || null,
-            created_at: new Date().toISOString(),
           },
         ])
 

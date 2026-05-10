@@ -10,13 +10,31 @@ export default async function AirdropsPage() {
   let errorMessage: string | null = null
 
   try {
-    const { data, error } = await supabase.from("airdrops").select("*")
-    
-    if (error) {
-      console.warn("Supabase fetch error, using local data:", error.message)
-      errorMessage = null // Don't show error to user, just use local data
-    } else if (data && data.length > 0) {
-      airdrops = data.map(normalizeAirdrop)
+    const [{ data: mainData, error: mainError }, { data: submittedData, error: submittedError }] =
+      await Promise.all([
+        supabase.from("airdrops").select("*").order("id", { ascending: false }),
+        supabase.from("submitted_airdrops").select("*").order("id", { ascending: false }),
+      ])
+
+    if (mainError && submittedError) {
+      console.warn(
+        "Supabase fetch error for both tables, using local data:",
+        mainError?.message || submittedError?.message
+      )
+    } else {
+      const normalizedAirdrops: Airdrop[] = []
+
+      if (mainData && mainData.length > 0) {
+        normalizedAirdrops.push(...mainData.map(normalizeAirdrop))
+      }
+
+      if (submittedData && submittedData.length > 0) {
+        normalizedAirdrops.push(...submittedData.map(normalizeAirdrop))
+      }
+
+      if (normalizedAirdrops.length > 0) {
+        airdrops = normalizedAirdrops
+      }
     }
   } catch (err) {
     console.warn("Failed to fetch from Supabase, using local data:", err)

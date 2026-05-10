@@ -23,11 +23,25 @@ export default async function AirdropDetailPage({
     .eq("id", id)
     .single()
 
-  if (error || !data) {
+  let airdropData = data
+  let fetchError = error
+
+  if (fetchError || !airdropData) {
+    const { data: submittedData, error: submittedError } = await supabase
+      .from("submitted_airdrops")
+      .select("*")
+      .eq("id", id)
+      .single()
+
+    airdropData = submittedData
+    fetchError = submittedError
+  }
+
+  if (fetchError || !airdropData) {
     notFound()
   }
 
-  const airdrop = normalizeAirdrop(data)
+  const airdrop = normalizeAirdrop(airdropData)
 
   return (
     <div className="min-h-screen bg-background">
