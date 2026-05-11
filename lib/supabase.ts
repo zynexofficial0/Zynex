@@ -34,8 +34,7 @@ export function normalizeArticle(record: any) {
   const slug = record.slug ??
     (record.title || "")
       .toLowerCase()
-      .replace(/[^
-\w\s-]/g, "")
+      .replace(/[^\w\s-]/g, "")
       .replace(/\s+/g, "-")
       .replace(/-+/g, "-")
 
@@ -51,3 +50,4 @@ export function normalizeArticle(record: any) {
     slug: slug,
   }
 }
+
