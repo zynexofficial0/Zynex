@@ -41,6 +41,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge assets using LayerZero", "Use Stargate Finance", "Interact with cross-chain dApps"],
     website: "https://layerzero.network",
     featured: true,
+    logo: "/logos/zro.png",
   },
   {
     id: "2",
@@ -54,6 +55,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge ETH to zkSync", "Swap tokens on zkSync", "Use zkSync dApps"],
     website: "https://zksync.io",
     featured: true,
+    logo: "/logos/zk.png",
   },
   {
     id: "3",
@@ -67,6 +69,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge assets to Scroll", "Use Scroll dApps", "Participate in the ecosystem"],
     website: "https://scroll.io",
     featured: true,
+    logo: "/logos/scr.png",
   },
   {
     id: "4",
@@ -80,6 +83,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Use Starknet applications", "Join the community", "Follow official updates"],
     website: "https://starknet.io",
     featured: true,
+    logo: "/logos/strk.png",
   },
   {
     id: "5",
@@ -93,6 +97,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge to Base", "Use Base apps", "Participate in promotions"],
     website: "https://base.org",
     featured: true,
+    logo: "/logos/base.png",
   },
   {
     id: "6",
@@ -106,6 +111,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge assets to Linea", "Use Linea dApps", "Join the Linea community"],
     website: "https://linea.build",
     featured: false,
+    logo: "/logos/linea.png",
   },
   {
     id: "7",
@@ -119,6 +125,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Use Fuel wallet", "Swap on Fuel", "Explore Fuel apps"],
     website: "https://fuel.network",
     featured: false,
+    logo: "/logos/fuel.png",
   },
   {
     id: "8",
@@ -132,6 +139,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Join Manta Network", "Use private transfers", "Follow the community"],
     website: "https://manta.network",
     featured: false,
+    logo: "/logos/manta.png",
   },
   {
     id: "9",
@@ -145,6 +153,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge to Blast", "Use Blast dApps", "Stake or hold tokens"],
     website: "https://blast.io",
     featured: false,
+    logo: "/logos/blast.png",
   },
   {
     id: "10",
@@ -158,6 +167,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge to Taiko", "Use Taiko dApps", "Join the Taiko community"],
     website: "https://taiko.xyz",
     featured: false,
+    logo: "/logos/taiko.png",
   },
   {
     id: "11",
@@ -171,6 +181,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge to Arbitrum", "Use Arbitrum dApps", "Engage with the ecosystem"],
     website: "https://arbitrum.io",
     featured: true,
+    logo: "/logos/arb.png",
   },
   {
     id: "12",
@@ -184,6 +195,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Use Celestia tools", "Explore modular chains", "Join the community"],
     website: "https://celestia.org",
     featured: false,
+    logo: "/logos/tia.png",
   },
   {
     id: "13",
@@ -197,6 +209,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Stake ETH on EigenLayer", "Explore restaking", "Follow ecosystem updates"],
     website: "https://eigenlayer.xyz",
     featured: false,
+    logo: "/logos/eigen.png",
   },
   {
     id: "14",
@@ -210,6 +223,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge assets using Wormhole", "Use supported chains", "Stay secure"],
     website: "https://wormhole.com",
     featured: false,
+    logo: "/logos/worm.png",
   },
   {
     id: "15",
@@ -223,6 +237,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge to Optimism", "Use Optimism apps", "Stake OP tokens"],
     website: "https://optimism.io",
     featured: false,
+    logo: "/logos/op.png",
   },
   {
     id: "16",
@@ -236,6 +251,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge to Polygon zkEVM", "Use zkEVM dApps", "Follow ecosystem news"],
     website: "https://polygon.technology",
     featured: false,
+    logo: "/logos/zkevm.png",
   },
   {
     id: "17",
@@ -249,6 +265,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Use Sei DEXs", "Stake SEI", "Join the community"],
     website: "https://sei.io",
     featured: false,
+    logo: "/logos/sei.png",
   },
   {
     id: "18",
@@ -262,6 +279,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Use Sui wallet", "Try Sui dApps", "Follow Sui news"],
     website: "https://sui.io",
     featured: false,
+    logo: "/logos/sui.png",
   },
   {
     id: "19",
@@ -275,6 +293,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge to Aptos", "Use Aptos apps", "Participate in community events"],
     website: "https://aptoslabs.com",
     featured: false,
+    logo: "/logos/apt.png",
   },
   {
     id: "20",
@@ -288,6 +307,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Use ZetaChain tools", "Bridge assets", "Join the network"],
     website: "https://zetachain.com",
     featured: false,
+    logo: "/logos/zeta.png",
   },
   {
     id: "21",
@@ -301,6 +321,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Use Berachain apps", "Join the community", "Hold BERA"],
     website: "https://berachain.com",
     featured: false,
+    logo: "/logos/bera.png",
   },
   {
     id: "22",
@@ -314,6 +335,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Use Node Network apps", "Bridge assets", "Join the community"],
     website: "https://node.network",
     featured: false,
+    logo: "/logos/node.png",
   },
   {
     id: "23",
@@ -327,6 +349,7 @@ export const airdrops: Airdrop[] = [
     requirements: ["Bridge to Mantle", "Use Mantle dApps", "Follow ecosystem updates"],
     website: "https://mantle.xyz",
     featured: false,
+    logo: "/logos/mnt.png",
   },
   {
     id: "24",
@@ -343,6 +366,7 @@ export const airdrops: Airdrop[] = [
     ],
     website: "https://www.kucoin.com/web3/starter-task?activityId=98",
     featured: true,
+    logo: "/logos/ioi.png",
   },
   {
     id: "25",
@@ -360,6 +384,7 @@ export const airdrops: Airdrop[] = [
     ],
     website: "https://newshare.bwb.global/en/earnCoinsTasks2?uuid=b4a5afe6-c54d-41e6-acac-3e2a55e3c408&_nocache=true&_nobar=true&_needChain=bnb&_chain_tags=bnb",
     featured: true,
+    logo: "/logos/bitget-ioi.png",
   },
 ]
 
@@ -374,6 +399,7 @@ export const articles: Article[] = [
     readTime: "5 min read",
     category: "Guide",
     slug: "maximize-airdrop-earnings-2026",
+    image: "/images/maximize-airdrops.png",
   },
   {
     id: "2",
@@ -385,6 +411,7 @@ export const articles: Article[] = [
     readTime: "8 min read",
     category: "Education",
     slug: "understanding-zkevm-layer2",
+    image: "/images/zkevm-guide.png",
   },
   {
     id: "3",
@@ -396,6 +423,7 @@ export const articles: Article[] = [
     readTime: "4 min read",
     category: "Analysis",
     slug: "top-10-airdrops-april-2026",
+    image: "/images/top-10-airdrops.png",
   },
   {
     id: "4",
@@ -407,6 +435,7 @@ export const articles: Article[] = [
     readTime: "6 min read",
     category: "Security",
     slug: "airdrop-security-tips",
+    image: "/images/security-wallet.png",
   },
   {
     id: "5",
@@ -418,6 +447,7 @@ export const articles: Article[] = [
     readTime: "7 min read",
     category: "Trends",
     slug: "multi-chain-airdrops-rise",
+    image: "/images/multichain.png",
   },
   {
     id: "6",
@@ -429,6 +459,7 @@ export const articles: Article[] = [
     readTime: "6 min read",
     category: "Guide",
     slug: "getting-started-layer2",
+    image: "/images/layer2-guide.png",
   },
   {
     id: "7",
@@ -440,6 +471,7 @@ export const articles: Article[] = [
     readTime: "5 min read",
     category: "Security",
     slug: "avoid-airdrop-scams",
+    image: "/images/avoid-scams.png",
   },
   {
     id: "8",
@@ -451,6 +483,7 @@ export const articles: Article[] = [
     readTime: "10 min read",
     category: "Analysis",
     slug: "defi-future-2026",
+    image: "/images/defi-future.png",
   },
   {
     id: "9",
@@ -462,6 +495,7 @@ export const articles: Article[] = [
     readTime: "9 min read",
     category: "Education",
     slug: "zero-knowledge-proofs",
+    image: "/images/zero-knowledge.png",
   },
   {
     id: "10",
@@ -473,6 +507,7 @@ export const articles: Article[] = [
     readTime: "7 min read",
     category: "Guide",
     slug: "staking-rewards-guide",
+    image: "/images/staking-rewards.png",
   },
   {
     id: "11",
@@ -484,6 +519,7 @@ export const articles: Article[] = [
     readTime: "8 min read",
     category: "Analysis",
     slug: "nft-airdrops-guide",
+    image: "/images/nft-airdrops.png",
   },
   {
     id: "12",
@@ -495,6 +531,7 @@ export const articles: Article[] = [
     readTime: "6 min read",
     category: "Security",
     slug: "web3-wallet-security",
+    image: "/images/web3-wallet.png",
   },
   {
     id: "13",
