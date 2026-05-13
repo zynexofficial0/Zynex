@@ -342,6 +342,23 @@ export const airdrops: Airdrop[] = [
     website: "https://www.kucoin.com/web3/starter-task?activityId=98",
     featured: true,
   },
+  {
+    id: "25",
+    name: "Bitget Wallet IOI Token Giveaway",
+    symbol: "IOI",
+    description: "Join the Bitget Wallet IOI giveaway for eligible regions and complete reward hub tasks to share 187,500 IOI.",
+    status: "active",
+    chain: "BNB",
+    estimatedValue: "187,500 IOI total",
+    endDate: "2026-05-21",
+    requirements: [
+      "Download Bitget Wallet: https://bitgetwallet.onelink.me/6Vx1/xt9vmbjv",
+      "Go to Reward Hub, join the event, complete tasks, and earn from the 187,500 IOI prize pool",
+      "Join announcement: https://t.me/Bitget_Wallet_Announcement",
+    ],
+    website: "https://newshare.bwb.global/en/earnCoinsTasks2?uuid=b4a5afe6-c54d-41e6-acac-3e2a55e3c408&_nocache=true&_nobar=true&_needChain=bnb&_chain_tags=bnb",
+    featured: true,
+  },
 ]
 
 export const articles: Article[] = [
