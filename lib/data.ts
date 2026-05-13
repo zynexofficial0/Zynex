@@ -328,16 +328,19 @@ export const airdrops: Airdrop[] = [
   },
   {
     id: "24",
-    name: "KuCoin Web3 Wallet x 10Trader Airdrop",
-    symbol: "KUCOIN",
-    description: "KuCoin Web3 Wallet x 10Trader is a multi-chain campaign offering airdrop rewards.",
+    name: "KuCoin Web3 Wallet x IOTrader Airdrop",
+    symbol: "IOI",
+    description: "Take part in the KuCoin Web3 Wallet x IOTrader airdrop for a share of 187,500 IOI across 3,000 winners.",
     status: "active",
     chain: "Multi-chain",
-    estimatedValue: "$20 - $500",
-    endDate: "2026-05-10",
-    requirements: ["Install KuCoin Web3 Wallet", "Use 10Trader features", "Complete campaign tasks"],
-    website: "https://www.kuc.com/web3/starter",
-    featured: false,
+    estimatedValue: "187,500 IOI total (3,000 winners)",
+    endDate: "2026-05-31",
+    requirements: [
+      "Complete the social tasks on X: https://x.com/i/status/2052659867194974329",
+      "Join the campaign: https://www.kucoin.com/web3/starter-task?activityId=98",
+    ],
+    website: "https://www.kucoin.com/web3/starter-task?activityId=98",
+    featured: true,
   },
 ]
 
