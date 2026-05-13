@@ -54,7 +54,7 @@ export default function HomePage() {
                 <span className="text-primary glow-text">Crypto Airdrops</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground text-balance">
-                Your gateway to free token distributions. Track, claim, and never miss an airdrop opportunity with Airdrop Hunt.
+                Your gateway to free token distributions. Track, claim, and never miss the hottest IOI token giveaways and crypto airdrops with Airdrop Hunt.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/airdrops">
@@ -130,7 +130,7 @@ export default function HomePage() {
                   Featured Airdrops
                 </h2>
                 <p className="mt-2 text-muted-foreground">
-                  {"Don't miss these high-value opportunities"}
+                  Live IOI token giveaways and top airdrop opportunities from KuCoin and Bitget.
                 </p>
               </div>
               <Link href="/airdrops">
