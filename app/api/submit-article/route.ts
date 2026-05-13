@@ -37,6 +37,7 @@ export async function POST(request: Request) {
             category: body.category,
             read_time: body.read_time || "5 min read",
             slug: slug,
+            image: body.image || null,
             published_at: new Date().toISOString(),
             created_at: new Date().toISOString(),
           },

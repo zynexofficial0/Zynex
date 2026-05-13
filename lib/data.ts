@@ -12,6 +12,7 @@ export interface Airdrop {
   requirements: string[]
   website: string
   featured: boolean
+  logo?: string
 }
 
 export interface Article {

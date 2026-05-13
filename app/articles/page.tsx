@@ -32,15 +32,37 @@ export default function ArticlesPage() {
             supabase.from("submitted_articles").select("*").order("created_at", { ascending: false }),
           ])
 
-        if (articlesError && submittedError) {
-          console.warn("Failed to load articles from Supabase", articlesError, submittedError)
-          return
-        }
-
-        const merged = [
+        let merged = [
           ...(articlesData ?? []).map(normalizeArticle),
           ...(submittedData ?? []).map(normalizeArticle),
         ]
+
+        // Load from localStorage as fallback
+        if (merged.length === 0 || (articlesError && submittedError)) {
+          try {
+            const stored = window.localStorage.getItem("article_submissions")
+            if (stored) {
+              const parsed = JSON.parse(stored)
+              if (Array.isArray(parsed)) {
+                const localArticles = parsed.map((record: any) => ({
+                  id: String(record.id ?? Date.now()),
+                  title: record.title ?? "",
+                  excerpt: record.excerpt ?? "",
+                  content: record.content ?? "",
+                  author: record.author ?? "Anonymous",
+                  publishedAt: record.created_at ?? new Date().toISOString(),
+                  readTime: record.read_time ?? "5 min read",
+                  category: record.category ?? "News",
+                  slug: record.slug ?? "",
+                  image: record.image ?? undefined,
+                }))
+                merged = [...merged, ...localArticles]
+              }
+            }
+          } catch (err) {
+            console.warn("Error loading articles from localStorage:", err)
+          }
+        }
 
         if (merged.length > 0) {
           setArticles(merged)

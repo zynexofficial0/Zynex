@@ -36,6 +36,7 @@ export async function POST(request: Request) {
             twitter: body.twitter || null,
             telegram: body.telegram || null,
             discord: body.discord || null,
+            logo: body.logo || null,
           },
         ])
 

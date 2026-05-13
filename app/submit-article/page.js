@@ -17,14 +17,28 @@ export default function SubmitArticle() {
     author: "",
     category: "",
     read_time: "",
+    image: "",
   });
 
+  const [imagePreview, setImagePreview] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+        setForm({ ...form, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async () => {
@@ -57,6 +71,7 @@ export default function SubmitArticle() {
           category: form.category,
           read_time: form.read_time || "5 min read",
           slug: slug,
+          image: form.image,
           published_at: new Date().toISOString(),
           created_at: new Date().toISOString(),
         },
@@ -82,7 +97,7 @@ export default function SubmitArticle() {
 
       setSuccess(true);
       setMessage(
-        "✓ Article submitted successfully! Our team will review it shortly."
+        "✓ Article submitted successfully! It's now live on the website."
       );
 
       // Reset form
@@ -93,7 +108,9 @@ export default function SubmitArticle() {
         author: "",
         category: "",
         read_time: "",
+        image: "",
       });
+      setImagePreview("");
 
       // Clear message after 5 seconds
       setTimeout(() => setMessage(""), 5000);
@@ -194,6 +211,46 @@ export default function SubmitArticle() {
           onChange={handleChange}
           style={inputStyle}
         />
+
+        <label style={{ display: "block", marginBottom: "10px", color: "#aaa", fontSize: "14px" }}>
+          Article Image or Logo
+        </label>
+        <div
+          style={{
+            border: "2px dashed #22c55e",
+            borderRadius: "10px",
+            padding: "20px",
+            textAlign: "center",
+            marginBottom: "15px",
+            background: "#1a1a1a",
+            cursor: "pointer",
+          }}
+        >
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            style={{ display: "none" }}
+            id="image-input"
+          />
+          <label htmlFor="image-input" style={{ cursor: "pointer" }}>
+            {imagePreview ? (
+              <div>
+                <img
+                  src={imagePreview}
+                  alt="Article preview"
+                  style={{ maxWidth: "150px", maxHeight: "150px", marginBottom: "10px" }}
+                />
+                <p style={{ color: "#22c55e", margin: "10px 0" }}>Click to change image</p>
+              </div>
+            ) : (
+              <div>
+                <p style={{ color: "#22c55e", fontWeight: "bold" }}>Click or drag to upload image</p>
+                <p style={{ color: "#666", fontSize: "12px" }}>PNG, JPG, GIF (Max 5MB)</p>
+              </div>
+            )}
+          </label>
+        </div>
 
         <button
           onClick={handleSubmit}

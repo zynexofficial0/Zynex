@@ -53,6 +53,7 @@ export function AirdropsList({ airdrops, error }: AirdropsListProps) {
               : [],
             website: record.website ?? record.url ?? "",
             featured: Boolean(record.featured),
+            logo: record.logo ?? undefined,
           }))
           setLocalAirdrops(normalized)
         }

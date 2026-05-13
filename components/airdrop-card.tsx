@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { ExternalLink, Clock, Layers, Star } from "lucide-react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -14,16 +15,28 @@ export function AirdropCard({ airdrop, featured = false }: AirdropCardProps) {
   return (
     <Card className={`relative overflow-hidden transition-all hover:border-primary/50 hover:glow-sm group ${featured ? 'border-primary/30 glow-sm' : ''}`}>
       {airdrop.featured && (
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3 right-3 z-10">
           <Star className="h-5 w-5 text-primary fill-primary drop-shadow-[0_0_8px_var(--primary)]" />
+        </div>
+      )}
+      {airdrop.logo && (
+        <div className="relative w-full h-24 bg-card">
+          <Image
+            src={airdrop.logo}
+            alt={airdrop.name}
+            fill
+            className="object-contain p-2"
+          />
         </div>
       )}
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary border border-primary/20 text-xl font-bold text-primary group-hover:border-primary/40 transition-colors">
-              {airdrop.symbol.slice(0, 2)}
-            </div>
+          <div className="flex items-center gap-3 flex-1">
+            {!airdrop.logo && (
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary border border-primary/20 text-xl font-bold text-primary group-hover:border-primary/40 transition-colors flex-shrink-0">
+                {airdrop.symbol.slice(0, 2)}
+              </div>
+            )}
             <div>
               <h3 className="font-display font-semibold text-foreground">{airdrop.name}</h3>
               <p className="text-sm text-muted-foreground">{airdrop.symbol}</p>
