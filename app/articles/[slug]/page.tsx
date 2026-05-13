@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { ArrowLeft, Clock, User, Calendar, Share2, Bookmark } from "lucide-react"
 import { Header } from "@/components/header"
@@ -168,6 +169,22 @@ export default async function ArticleDetailPage({
             </div>
           </div>
         </section>
+
+        {/* Article Image */}
+        {article.image && (
+          <section className="border-b border-border bg-card/30">
+            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
+              <div className="relative w-full h-64 rounded-lg overflow-hidden bg-card border border-border">
+                <Image
+                  src={article.image}
+                  alt={article.title}
+                  fill
+                  className="object-contain p-4"
+                />
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Article Content */}
         <section className="py-12">
