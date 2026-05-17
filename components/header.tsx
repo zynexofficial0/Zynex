@@ -9,6 +9,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/airdrops", label: "Airdrops" },
   { href: "/articles", label: "Articles" },
+  { href: "/submit-airdrop", label: "Submit Airdrop" },
 ]
 
 export function Header() {
@@ -43,16 +44,11 @@ export function Header() {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Link href="/login">
-              <Button variant="ghost" size="sm" className="hover:text-primary">
-                Log in
-              </Button>
-            </Link>
-            <Link href="/signup">
+            <a href="https://discord.gg" target="_blank" rel="noopener noreferrer">
               <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all">
-                Sign up
+                Join Community
               </Button>
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,16 +76,11 @@ export function Header() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
-                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">
-                    Log in
-                  </Button>
-                </Link>
-                <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+                <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
                   <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                    Sign up
+                    Join Community
                   </Button>
-                </Link>
+                </a>
               </div>
             </nav>
           </div>

@@ -5,24 +5,23 @@ const footerLinks = {
   product: [
     { href: "/airdrops", label: "Airdrops" },
     { href: "/articles", label: "Articles" },
-    { href: "#", label: "Submit Airdrop" },
   ],
   company: [
-    { href: "#", label: "About" },
-    { href: "#", label: "Contact" },
-    { href: "#", label: "Careers" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+    { href: "/careers", label: "Careers" },
   ],
   legal: [
-    { href: "#", label: "Privacy Policy" },
-    { href: "#", label: "Terms of Service" },
-    { href: "#", label: "Disclaimer" },
+    { href: "/privacy", label: "Privacy Policy" },
+    { href: "/terms", label: "Terms of Service" },
+    { href: "/disclaimer", label: "Disclaimer" },
   ],
 }
 
 const socialLinks = [
-  { href: "#", icon: Twitter, label: "Twitter" },
-  { href: "#", icon: MessageCircle, label: "Discord" },
-  { href: "#", icon: Github, label: "GitHub" },
+  { href: "https://twitter.com", icon: Twitter, label: "Twitter" },
+  { href: "https://discord.gg", icon: MessageCircle, label: "Discord" },
+  { href: "https://github.com", icon: Github, label: "GitHub" },
 ]
 
 export function Footer() {
