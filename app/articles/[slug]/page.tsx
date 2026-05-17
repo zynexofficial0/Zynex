@@ -126,8 +126,15 @@ export default async function ArticleDetailPage({
                 />
               )}
               <div>
-                  <p className="font-medium text-foreground">{article.author}</p>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  {article.title}
+                </h1>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    <span>{article.author}</span>
+                  </span>
+                  <span className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
                     <span>
                       {new Date(article.publishedAt).toLocaleDateString("en-US", {
@@ -136,20 +143,24 @@ export default async function ArticleDetailPage({
                         year: "numeric",
                       })}
                     </span>
-                  </div>
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    <span>{article.readTime}</span>
+                  </span>
                 </div>
               </div>
+            </div>
 
-              <div className="flex gap-2">
-                <Button variant="outline" size="sm">
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Bookmark className="h-4 w-4 mr-2" />
-                  Save
-                </Button>
-              </div>
+            <div className="flex gap-2 mt-6 pt-6 border-t border-border">
+              <Button variant="outline" size="sm">
+                <Share2 className="h-4 w-4 mr-2" />
+                Share
+              </Button>
+              <Button variant="outline" size="sm">
+                <Bookmark className="h-4 w-4 mr-2" />
+                Save
+              </Button>
             </div>
           </div>
         </section>

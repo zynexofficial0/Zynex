@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-import { Search, Filter, X, Plus } from "lucide-react"
+import { Search, Filter, X } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -56,19 +55,9 @@ export default function AirdropsPage() {
         <section className="border-b border-border bg-card/50 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-                  All <span className="text-primary glow-text">Airdrops</span>
-                </h1>
-              </div>
-              <Link href="/submit-airdrop">
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all w-full md:w-auto">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Submit Airdrop
-                </Button>
-              </Link>
-            </div>
+            <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
+              All <span className="text-primary glow-text">Airdrops</span>
+            </h1>
             <p className="mt-2 text-muted-foreground">
               Browse and discover the latest crypto airdrops across all chains
             </p>
