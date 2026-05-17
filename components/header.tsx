@@ -9,6 +9,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/airdrops", label: "Airdrops" },
   { href: "/articles", label: "Articles" },
+  { href: "/submit-airdrop", label: "Submit Airdrop" },
 ]
 
 export function Header() {

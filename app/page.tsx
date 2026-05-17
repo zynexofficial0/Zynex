@@ -57,9 +57,9 @@ export default function HomePage() {
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Link href="/signup">
+                <Link href="/submit-airdrop">
                   <Button size="lg" variant="outline" className="border-primary/50 hover:border-primary hover:bg-primary/10 w-full sm:w-auto transition-all">
-                    Create Account
+                    Submit Airdrop
                   </Button>
                 </Link>
               </div>
