@@ -20,7 +20,7 @@ const footerLinks = {
 
 const socialLinks = [
   { href: "https://twitter.com", icon: Twitter, label: "Twitter" },
-  { href: "https://discord.gg", icon: MessageCircle, label: "Discord" },
+  { href: "https://discord.com/channels/1428088433280028845", icon: MessageCircle, label: "Discord" },
   { href: "https://github.com", icon: Github, label: "GitHub" },
 ]
 
