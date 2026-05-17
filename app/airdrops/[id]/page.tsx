@@ -1,14 +1,17 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ExternalLink, Clock, Layers, CheckCircle2, AlertCircle } from "lucide-react"
+import { ArrowLeft, ExternalLink, Clock, Layers, CheckCircle2, AlertCircle, MessageCircle, Send } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getStatusColor } from "@/lib/data"
-import { supabase, normalizeAirdrop } from "@/lib/supabase"
+import { airdrops, getStatusColor } from "@/lib/data"
 
-export const dynamic = "force-dynamic"
+export function generateStaticParams() {
+  return airdrops.map((airdrop) => ({
+    id: airdrop.id,
+  }))
+}
 
 export default async function AirdropDetailPage({
   params,
@@ -16,32 +19,11 @@ export default async function AirdropDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
+  const airdrop = airdrops.find((a) => a.id === id)
 
-  const { data, error } = await supabase
-    .from("airdrops")
-    .select("*")
-    .eq("id", id)
-    .single()
-
-  let airdropData = data
-  let fetchError = error
-
-  if (fetchError || !airdropData) {
-    const { data: submittedData, error: submittedError } = await supabase
-      .from("submitted_airdrops")
-      .select("*")
-      .eq("id", id)
-      .single()
-
-    airdropData = submittedData
-    fetchError = submittedError
-  }
-
-  if (fetchError || !airdropData) {
+  if (!airdrop) {
     notFound()
   }
-
-  const airdrop = normalizeAirdrop(airdropData)
 
   return (
     <div className="min-h-screen bg-background">
@@ -67,8 +49,18 @@ export default async function AirdropDetailPage({
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
               <div className="flex items-start gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary border border-primary/20 text-2xl font-bold text-primary glow-sm">
-                  {airdrop.symbol.slice(0, 2)}
+                <div className="flex-shrink-0">
+                  {airdrop.logo ? (
+                    <img
+                      src={airdrop.logo}
+                      alt={airdrop.name}
+                      className="h-16 w-16 rounded-2xl object-cover border-2 border-primary/30"
+                    />
+                  ) : (
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary border border-primary/20 text-2xl font-bold text-primary glow-sm">
+                      {airdrop.symbol.slice(0, 2)}
+                    </div>
+                  )}
                 </div>
                 <div>
                   <div className="flex items-center gap-3">
@@ -83,13 +75,29 @@ export default async function AirdropDetailPage({
                 </div>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex gap-3 flex-wrap">
                 <a href={airdrop.website} target="_blank" rel="noopener noreferrer">
                   <Button className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all">
                     Visit Website
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </Button>
                 </a>
+                {airdrop.telegramLink && (
+                  <a href={airdrop.telegramLink} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="hover:border-primary/50 hover:text-primary">
+                      <Send className="h-4 w-4 mr-2" />
+                      Telegram
+                    </Button>
+                  </a>
+                )}
+                {airdrop.discordLink && (
+                  <a href={airdrop.discordLink} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="hover:border-primary/50 hover:text-primary">
+                      <MessageCircle className="h-4 w-4 mr-2" />
+                      Discord
+                    </Button>
+                  </a>
+                )}
               </div>
             </div>
           </div>
