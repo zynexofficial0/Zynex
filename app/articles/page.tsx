@@ -1,85 +1,24 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Search, BookOpen } from "lucide-react"
-import { createClient } from "@supabase/supabase-js"
+import { useState } from "react"
+import Link from "next/link"
+import { Search, BookOpen, Plus } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { ArticleCard } from "@/components/article-card"
-import { articles as defaultArticles } from "@/lib/data"
-import { normalizeArticle } from "@/lib/supabase"
-import type { Article } from "@/lib/data"
+import { articles } from "@/lib/data"
 
-const categories = ["All", "Guide", "Education", "Analysis", "Security", "Trends", "News"]
-
-const supabase = createClient(
-  "https://kmhtrtkblpxmowcibrjf.supabase.co",
-  "sb_publishable_QnmZnH13G6a6Ny0pCuN8Xw_qlGevC7O"
-)
+const categories = ["All", "Guide", "Education", "Analysis", "Security", "Trends"]
 
 export default function ArticlesPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("All")
-  const [articles, setArticles] = useState<Article[]>(defaultArticles)
-
-  useEffect(() => {
-    async function fetchArticles() {
-      try {
-        const [{ data: articlesData, error: articlesError }, { data: submittedData, error: submittedError }] =
-          await Promise.all([
-            supabase.from("articles").select("*").order("created_at", { ascending: false }),
-            supabase.from("submitted_articles").select("*").order("created_at", { ascending: false }),
-          ])
-
-        let merged = [
-          ...(articlesData ?? []).map(normalizeArticle),
-          ...(submittedData ?? []).map(normalizeArticle),
-        ]
-
-        // Load from localStorage as fallback
-        if (merged.length === 0 || (articlesError && submittedError)) {
-          try {
-            const stored = window.localStorage.getItem("article_submissions")
-            if (stored) {
-              const parsed = JSON.parse(stored)
-              if (Array.isArray(parsed)) {
-                const localArticles = parsed.map((record: any) => ({
-                  id: String(record.id ?? Date.now()),
-                  title: record.title ?? "",
-                  excerpt: record.excerpt ?? "",
-                  content: record.content ?? "",
-                  author: record.author ?? "Anonymous",
-                  publishedAt: record.created_at ?? new Date().toISOString(),
-                  readTime: record.read_time ?? "5 min read",
-                  category: record.category ?? "News",
-                  slug: record.slug ?? "",
-                  image: record.image ?? undefined,
-                }))
-                merged = [...merged, ...localArticles]
-              }
-            }
-          } catch (err) {
-            console.warn("Error loading articles from localStorage:", err)
-          }
-        }
-
-        if (merged.length > 0) {
-          setArticles(merged)
-        }
-      } catch (error) {
-        console.warn("Error loading articles:", error)
-      }
-    }
-
-    fetchArticles()
-  }, [])
 
   const filteredArticles = articles.filter((article) => {
-    const matchesSearch =
-      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
-
+    
     const matchesCategory = categoryFilter === "All" || article.category === categoryFilter
 
     return matchesSearch && matchesCategory
@@ -94,12 +33,22 @@ export default function ArticlesPage() {
         <section className="border-b border-border bg-card/50 relative overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-            <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              Articles & <span className="text-primary glow-text">Guides</span>
-            </h1>
-            <p className="mt-2 text-muted-foreground">
-              Expert insights, tutorials, and analysis for crypto enthusiasts
-            </p>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
+                  Articles & <span className="text-primary glow-text">Guides</span>
+                </h1>
+                <p className="mt-2 text-muted-foreground">
+                  Expert insights, tutorials, and analysis for crypto enthusiasts
+                </p>
+              </div>
+              <Link href="/submit-article">
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 glow-sm hover:glow transition-all w-full md:w-auto">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Write Article
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
 

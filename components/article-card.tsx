@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Image from "next/image"
 import { ArrowRight, Clock, User } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import type { Article } from "@/lib/data"
@@ -11,13 +10,12 @@ interface ArticleCardProps {
 export function ArticleCard({ article }: ArticleCardProps) {
   return (
     <Card className="group overflow-hidden transition-all hover:border-primary/50 hover:glow-sm">
-      {article.image && (
-        <div className="relative w-full h-48 bg-card">
-          <Image
-            src={article.image}
+      {article.logo && (
+        <div className="h-40 w-full overflow-hidden bg-secondary">
+          <img
+            src={article.logo}
             alt={article.title}
-            fill
-            className="object-contain p-4"
+            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         </div>
       )}

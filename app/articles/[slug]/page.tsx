@@ -1,5 +1,4 @@
 import Link from "next/link"
-import Image from "next/image"
 import { notFound } from "next/navigation"
 import { ArrowLeft, Clock, User, Calendar, Share2, Bookmark } from "lucide-react"
 import { Header } from "@/components/header"
@@ -118,30 +117,15 @@ export default async function ArticleDetailPage({
         {/* Article Header */}
         <section className="border-b border-border">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-                {article.category}
-              </span>
-              <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                <Clock className="h-4 w-4" />
-                {article.readTime}
-              </span>
-            </div>
-            
-            <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground text-balance">
-              {article.title}
-            </h1>
-            
-            <p className="mt-4 text-lg text-muted-foreground">
-              {article.excerpt}
-            </p>
-
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-8 pt-6 border-t border-border">
-              <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-primary font-semibold">
-                  {article.author.split(" ").map((n) => n[0]).join("")}
-                </div>
-                <div>
+            <div className="flex items-start gap-4">
+              {article.logo && (
+                <img
+                  src={article.logo}
+                  alt={article.title}
+                  className="h-16 w-16 rounded-2xl object-cover border-2 border-primary/30 flex-shrink-0"
+                />
+              )}
+              <div>
                   <p className="font-medium text-foreground">{article.author}</p>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Calendar className="h-4 w-4" />
@@ -169,22 +153,6 @@ export default async function ArticleDetailPage({
             </div>
           </div>
         </section>
-
-        {/* Article Image */}
-        {article.image && (
-          <section className="border-b border-border bg-card/30">
-            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
-              <div className="relative w-full h-64 rounded-lg overflow-hidden bg-card border border-border">
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  fill
-                  className="object-contain p-4"
-                />
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* Article Content */}
         <section className="py-12">

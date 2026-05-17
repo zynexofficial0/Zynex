@@ -6,9 +6,6 @@ import { Button } from "@/components/ui/button"
 import { AirdropCard } from "@/components/airdrop-card"
 import { ArticleCard } from "@/components/article-card"
 import { airdrops, articles } from "@/lib/data"
-import dynamic from "next/dynamic"
-
-import Falling3DClient from "@/components/components/Falling3DClient"
 
 const features = [
   {
@@ -39,9 +36,6 @@ export default function HomePage() {
       <main className="pt-16">
         {/* Hero Section */}
         <section className="relative overflow-hidden">
-          {/* 3D Falling Objects Background */}
-          <Falling3DClient />
-          
           {/* Background Gradient */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/15 via-background to-background" />
           <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
@@ -54,7 +48,7 @@ export default function HomePage() {
                 <span className="text-primary glow-text">Crypto Airdrops</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground text-balance">
-                Your gateway to free token distributions. Track, claim, and never miss the hottest IOI token giveaways and crypto airdrops with Airdrop Hunt.
+                Your gateway to free token distributions. Track, claim, and never miss an airdrop opportunity with Airdrop Hunt.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/airdrops">
@@ -130,7 +124,7 @@ export default function HomePage() {
                   Featured Airdrops
                 </h2>
                 <p className="mt-2 text-muted-foreground">
-                  Live IOI token giveaways and top airdrop opportunities from KuCoin and Bitget.
+                  {"Don't miss these high-value opportunities"}
                 </p>
               </div>
               <Link href="/airdrops">
