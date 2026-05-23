@@ -32,11 +32,13 @@ export async function POST(request: NextRequest) {
 
     // Create unique filename
     const timestamp = Date.now()
-    const random = Math.random().toString(36).substring(7)
-    const filename = `logo-${timestamp}-${random}.${file.name.split(".").pop()}`
+    const random = Math.random().toString(36).substring(2, 9)
+    const extension = file.name.split(".").pop()
+    const filename = `logo-${timestamp}-${random}.${extension}`
 
-    // Upload to Supabase Storage
+    // Supabase upload
     const supabase = getSupabaseServer()
+
     const { data, error } = await supabase.storage
       .from("airdrop-logos")
       .upload(filename, file, {
@@ -44,28 +46,39 @@ export async function POST(request: NextRequest) {
         upsert: false,
       })
 
+    // Detailed error logging
     if (error) {
-      console.error("Storage error:", error)
+      console.error("Storage upload error:", error)
+
       return NextResponse.json(
-        { error: "Failed to upload logo" },
+        {
+          success: false,
+          error: error.message,
+          details: error,
+        },
         { status: 500 }
       )
     }
 
     // Get public URL
-    const { data: publicUrl } = supabase.storage
+    const { data: publicUrlData } = supabase.storage
       .from("airdrop-logos")
       .getPublicUrl(filename)
 
     return NextResponse.json({
       success: true,
-      url: publicUrl.publicUrl,
+      url: publicUrlData.publicUrl,
       filename,
+      data,
     })
-  } catch (error) {
-    console.error("Upload error:", error)
+  } catch (error: any) {
+    console.error("Upload route error:", error)
+
     return NextResponse.json(
-      { error: "An error occurred while uploading the logo." },
+      {
+        success: false,
+        error: error?.message || "Unknown upload error",
+      },
       { status: 500 }
     )
   }
