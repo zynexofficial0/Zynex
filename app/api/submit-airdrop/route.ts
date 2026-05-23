@@ -139,8 +139,12 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error("Database error:", error)
+      console.error("Error details:", error.code, error.message, error.details)
       return NextResponse.json(
-        { error: "Failed to submit airdrop. Please try again." },
+        { 
+          error: error.message || "Failed to submit airdrop. Please try again.",
+          details: error.details || "Database error"
+        },
         { status: 500 }
       )
     }
