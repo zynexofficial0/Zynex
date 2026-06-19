@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { FallingCoins } from '@/components/falling-coins'
 import './globals.css'
 
 const inter = Inter({ 
@@ -51,6 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+        <FallingCoins />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
