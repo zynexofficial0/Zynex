@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Search, BookOpen } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -8,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { ArticleCard } from "@/components/article-card"
 import { articles } from "@/lib/data"
 
-const categories = ["All", "Guide", "Education", "Analysis", "Security", "Trends"]
+const categories = ["All", "Guide", "Education", "Analysis", "Security", "Trends", "News"]
 
 export default function ArticlesPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -28,16 +29,29 @@ export default function ArticlesPage() {
       <Header />
       
       <main className="pt-16">
-        {/* Page Header */}
+        {/* Page Header with 3D */}
         <section className="border-b border-border bg-card/50 relative overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-            <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              Articles & <span className="text-primary glow-text">Guides</span>
-            </h1>
-            <p className="mt-2 text-muted-foreground">
-              Expert insights, tutorials, and analysis for crypto enthusiasts
-            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 lg:col-span-1">
+                <div>
+                  <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
+                    Articles & <span className="text-primary glow-text">Guides</span>
+                  </h1>
+                  <p className="mt-2 text-muted-foreground">
+                    Expert insights, tutorials, and analysis for crypto enthusiasts
+                  </p>
+                </div>
+              </div>
+              <div className="hidden lg:block">
+                <Link href="/submit-article">
+                  <Button size="sm" variant="outline" className="w-full">
+                    Submit Article
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 

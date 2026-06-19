@@ -251,7 +251,7 @@ export default function SubmitAirdropPage() {
       <Header />
 
       <main className="pt-20 pb-20">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {/* Back Button */}
           <Link
             href="/airdrops"
@@ -261,16 +261,19 @@ export default function SubmitAirdropPage() {
             Back to Airdrops
           </Link>
 
-          <Card className="border-primary/30 glow-sm">
-            <CardHeader>
-              <CardTitle className="text-2xl">Submit Your Airdrop</CardTitle>
-              <p className="text-sm text-muted-foreground mt-2">
-                Fill in the details below to submit your airdrop. It will be published immediately and appear live on our platform.
-              </p>
-            </CardHeader>
+          <div className="grid grid-cols-1 gap-8">
+            {/* Form */}
+            <div>
+              <Card className="border-primary/30 glow-sm">
+                <CardHeader>
+                  <CardTitle className="text-2xl">Submit Your Airdrop</CardTitle>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Fill in the details below to submit your airdrop. It will be published immediately and appear live on our platform.
+                  </p>
+                </CardHeader>
 
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Success Message */}
                 {successMessage && (
                   <div className="flex items-center gap-3 p-4 rounded-lg bg-primary/10 border border-primary/30">
@@ -521,6 +524,8 @@ export default function SubmitAirdropPage() {
               </form>
             </CardContent>
           </Card>
+            </div>
+          </div>
         </div>
       </main>
 

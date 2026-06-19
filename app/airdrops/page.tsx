@@ -51,16 +51,20 @@ export default function AirdropsPage() {
       <Header />
       
       <main className="pt-16">
-        {/* Page Header */}
+        {/* Page Header with 3D */}
         <section className="border-b border-border bg-card/50 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-            <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              All <span className="text-primary glow-text">Airdrops</span>
-            </h1>
-            <p className="mt-2 text-muted-foreground">
-              Browse and discover the latest crypto airdrops across all chains
-            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
+                  All <span className="text-primary glow-text">Airdrops</span>
+                </h1>
+                <p className="mt-2 text-muted-foreground">
+                  Browse and discover the latest crypto airdrops across all chains
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 

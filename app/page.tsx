@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Zap, Shield, TrendingUp, Search } from "lucide-react"
+import { ArrowRight, Zap, Shield, TrendingUp } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -62,10 +62,14 @@ export default function HomePage() {
                     Submit Airdrop
                   </Button>
                 </Link>
+                <Link href="/submit-article">
+                  <Button size="lg" variant="outline" className="border-primary/50 hover:border-primary hover:bg-primary/10 w-full sm:w-auto transition-all">
+                    Submit Article
+                  </Button>
+                </Link>
               </div>
             </div>
 
-            {/* Stats */}
             <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
                 { value: "250+", label: "Active Airdrops" },
@@ -82,7 +86,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* Features Section with 3D */}
         <section className="py-20 border-t border-border">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -94,23 +98,26 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {features.map((feature) => (
-                <div
-                  key={feature.title}
-                  className="relative p-6 rounded-2xl border border-border bg-card/80 hover:border-primary/50 hover:glow-sm transition-all group"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 mb-4 group-hover:bg-primary/20 transition-colors">
-                    <feature.icon className="h-6 w-6 text-primary" />
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Features List */}
+              <div className="space-y-6">
+                {features.map((feature) => (
+                  <div
+                    key={feature.title}
+                    className="relative p-6 rounded-2xl border border-border bg-card/80 hover:border-primary/50 hover:glow-sm transition-all group"
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 mb-4 group-hover:bg-primary/20 transition-colors">
+                      <feature.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-display text-lg font-semibold text-foreground">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {feature.description}
+                    </p>
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-foreground">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    {feature.description}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>
