@@ -70,16 +70,17 @@ export async function POST(request: NextRequest) {
           author: body.author.trim(),
           category: body.category.trim(),
           content: body.content.trim(),
-          published_at: new Date().toISOString(),
           ip_address: clientIp,
         },
       ])
-      .select()
+      .select("*")
 
     if (error) {
       console.error("Article submission error:", error)
+      const errorMessage =
+        error?.message || "Failed to submit article. Please try again."
       return NextResponse.json(
-        { error: "Failed to submit article. Please try again." },
+        { error: errorMessage },
         { status: 500 }
       )
     }

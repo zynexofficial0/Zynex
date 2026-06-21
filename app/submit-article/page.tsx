@@ -89,10 +89,12 @@ export default function SubmitArticlePage() {
         body: JSON.stringify(formData),
       })
 
-      const result = await response.json()
+      const result = await response.json().catch(() => ({}))
 
       if (!response.ok) {
-        throw new Error(result.error || "Failed to submit article")
+        throw new Error(
+          result.error || `Failed to submit article (${response.status})`
+        )
       }
 
       setSuccessMessage(result.message || "Article submitted successfully.")
